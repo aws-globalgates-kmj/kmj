@@ -1,0 +1,91 @@
+server:
+  port: 10000
+  servlet:
+    session:
+      tracking-modes: cookie
+  ssl:
+    enabled: true
+    certificate: classpath:key/globalgates+3.pem
+    certificate-private-key: classpath:key/globalgates+3-key.pem
+
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${EC2_HOST}:${PSQL_PORT}/${PSQL_DATABASE}?serverTimezone=Asia/Seoul
+    username: ${PSQL_USERNAME}
+    password: ${PSQL_PASSWORD}
+  session:
+    redis:
+      repository-type: indexed
+      flush-mode: immediate
+  data:
+    redis:
+      host: ${EC2_HOST}
+      port: ${REDIS_PORT}
+
+  rabbitmq:
+    host: ${EC2_HOST}
+    port: 5672
+    username: guest
+    password: guest
+
+  cache:
+    type: redis
+
+  profiles:
+    active: local
+    include: oauth
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 10MB
+      max-file-size: 5MB
+      max-request-size: 15MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "${MAIL_USERNAME}"
+    password: "${MAIL_PASSWORD}"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    #            auth, 사용자 인증(username, password 확인)
+    #            start tls(Transport Layer Security), 메일 내용이 네트워크상에서 암호화되어 전송
+
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.app.globalgates.domain; com.app.globalgates.dto;
+  type-handlers-package: com.app.globalgates.mybatis.handler
+  configuration:
+    map-underscore-to-camel-case: true
+
+message:
+  api-key: ${MESSAGE_API_KEY}
+  api-secret-key: ${MESSAGE_API_SECRET_KEY}
+
+# openssl rand -base64 32
+jwt:
+  secret: "${JWT_SECRET}"
+
+aws:
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
+  s3:
+    bucket-name: "${AWS_BUCKET_NAME}"
+  region: "${AWS_REGION}"
+
+google:
+  maps:
+    api-key: "${GOOGLE_MAPS_API_KEY}"
+
+bootpay:
+  application-id: ${BOOTPAY_APPLICATION_ID}
+  private-key: "${BOOTPAY_PRIVATE_KEY}"
+  api-base-url: https://api.bootpay.co.kr
