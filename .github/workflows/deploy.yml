@@ -69,7 +69,7 @@ jobs:
             --build-arg BOOTPAY_APPLICATION_ID=${{ secrets.BOOTPAY_APPLICATION_ID }} \
             --build-arg BOOTPAY_PRIVATE_KEY=${{ secrets.BOOTPAY_PRIVATE_KEY }} \
             --build-arg MAIL_USERNAME=${{ secrets.MAIL_USERNAME }} \
-            --build-arg MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }} \
+            --build-arg MAIL_PASSWORD="${{ secrets.MAIL_PASSWORD }}" \
             --build-arg MESSAGE_API_KEY=${{ secrets.MESSAGE_API_KEY }} \
             --build-arg MESSAGE_API_SECRET_KEY=${{ secrets.MESSAGE_API_SECRET_KEY }} \
           -t app .
@@ -99,7 +99,7 @@ jobs:
             -e BOOTPAY_APPLICATION_ID=${{ secrets.BOOTPAY_APPLICATION_ID }} \
             -e BOOTPAY_PRIVATE_KEY=${{ secrets.BOOTPAY_PRIVATE_KEY }} \
             -e MAIL_USERNAME=${{ secrets.MAIL_USERNAME }} \
-            -e MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }} \
+            -e MAIL_PASSWORD="${{ secrets.MAIL_PASSWORD }}" \
             -e MESSAGE_API_KEY=${{ secrets.MESSAGE_API_KEY }} \
             -e MESSAGE_API_SECRET_KEY=${{ secrets.MESSAGE_API_SECRET_KEY }} \
             app
