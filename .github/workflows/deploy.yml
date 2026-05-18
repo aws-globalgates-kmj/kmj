@@ -51,6 +51,8 @@ jobs:
             --build-arg PSQL_PASSWORD=${{ secrets.PSQL_PASSWORD }} \
             --build-arg REDIS_PORT=${{ secrets.REDIS_PORT }} \
             --build-arg EC2_HOST=${{ secrets.EC2_HOST }} \
+            --build-arg EC2_HOST1=${{ secrets.EC2_HOST1 }} \
+            --build-arg EC2_HOST2=${{ secrets.EC2_HOST2 }} \
             --build-arg AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} \
             --build-arg AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }} \
             --build-arg AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} \
@@ -78,6 +80,8 @@ jobs:
             -e PSQL_PASSWORD=${{ secrets.PSQL_PASSWORD }} \
             -e REDIS_PORT=${{ secrets.REDIS_PORT }} \
             -e EC2_HOST=${{ secrets.EC2_HOST }} \
+            -e EC2_HOST1=${{ secrets.EC2_HOST1 }} \
+            -e EC2_HOST2=${{ secrets.EC2_HOST2 }} \
             -e AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} \
             -e AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }} \
             -e AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} \
