@@ -21,7 +21,7 @@ spring:
       port: ${REDIS_PORT}
 
   rabbitmq:
-    host: ${EC2_HOST}
+    host: ${EC2_HOST1}
     port: 5672
     username: guest
     password: guest
