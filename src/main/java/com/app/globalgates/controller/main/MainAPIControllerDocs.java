@@ -167,6 +167,7 @@ public interface MainAPIControllerDocs {
     public void deleteBookmark(@PathVariable Long memberId, @PathVariable Long postId);
 
     @Operation(
+            tags = {"Main", "Friends"},
             summary = "팔로우 추가",
             description = "회원을 팔로우한다.",
             parameters = {@Parameter(name = "followDTO", description = "팔로우 정보")}
@@ -174,6 +175,7 @@ public interface MainAPIControllerDocs {
     public void follow(@RequestBody FollowDTO followDTO);
 
     @Operation(
+            tags = {"Main", "Friends"},
             summary = "팔로우 해제",
             description = "회원의 팔로우를 해제한다.",
             parameters = {@Parameter(name = "followerId", description = "팔로우 하는 회원의 id"),
