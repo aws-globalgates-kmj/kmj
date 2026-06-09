@@ -182,6 +182,7 @@ public class JwtTokenProvider {
             return bearerToken.substring(7);
         }
 
+        
         if(request.getCookies() != null){
             for(Cookie cookie : request.getCookies()){
                 if("accessToken".equals(cookie.getName())){
