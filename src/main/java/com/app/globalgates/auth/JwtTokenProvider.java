@@ -57,7 +57,7 @@ public class JwtTokenProvider {
 
         Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
         accessTokenCookie.setPath("/");
-        accessTokenCookie.setMaxAge(60 * 60 * 24 * 1);
+        accessTokenCookie.setMaxAge(60 * 60 * 1);
         response.addCookie(accessTokenCookie);
 
         return accessToken;
@@ -76,7 +76,7 @@ public class JwtTokenProvider {
 
         Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
         accessTokenCookie.setPath("/");
-        accessTokenCookie.setMaxAge(60 * 60 * 24 * 1);
+        accessTokenCookie.setMaxAge(60 * 60 * 1);
         response.addCookie(accessTokenCookie);
 
         return accessToken;
