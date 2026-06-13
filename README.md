@@ -151,13 +151,16 @@ body: JSON.stringify({
     receiptId: bootpayData.receipt_id || "",  
     paidAt: bootpayData.purchased_at || null,  
 }),
-```의
+```
+의
 ```js
 amount: bootpayResponse.price,
-```를
+```
+를
 ```js 
 amount: bootpayResponse.price || plan.amountValue,
-```로 수정하였다.  
+```
+로 수정하였다.  
 
   결제 저장시 amount 에 bootpayResponse.price 를 넣었으나 null 전달.  
   plan.amountValue 로 항상 금액이 들어가도록 수정.  
