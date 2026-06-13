@@ -143,15 +143,16 @@ GlobalGates는 무역 기반 비즈니스 소셜 마켓 플랫폼으로, 국내 
 <img src="./README_images/debug/Subscribe-2.png">
 
 - 해결
-
-`body: JSON.stringify({  
+```js
+body: JSON.stringify({  
     subscriptionId: subscriptionId,  
     amount: bootpayResponse.price,  
     paymentMethod: bootpayData.method_origin || bootpayData.method || "",  
     receiptId: bootpayData.receipt_id || "",  
     paidAt: bootpayData.purchased_at || null,  
-}),`  
-에서 amount: bootpayResponse.price || plan.amountValue, 로 수정하였다.  
+}),
+```
+에서 `amount: bootpayResponse.price || plan.amountValue,` 로 수정하였다.  
 
   결제 저장시 amount 에 bootpayResponse.price 를 넣었으나 null 전달.  
   plan.amountValue 로 항상 금액이 들어가도록 수정.  
