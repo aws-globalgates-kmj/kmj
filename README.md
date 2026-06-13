@@ -100,9 +100,9 @@ GlobalGates는 무역 기반 비즈니스 소셜 마켓 플랫폼으로, 국내 
 
 - 문제된 상황
 
-  게시글 작성 중 임시저장을 하면 본문만 저장되고 태그·위치정보가 사라짐.
-  이후 다른 글을 작성하다 임시저장 목록에서 이전 글을 불러오면,
-  본문은 복원되지만 현재 작성 중이던 태그·위치가 그대로 남아 섞이는 문제 발생.
+  게시글 작성 중 임시저장을 하면 본문만 저장되고 태그·위치정보가 사라짐.  
+  이후 다른 글을 작성하다 임시저장 목록에서 이전 글을 불러오면,  
+  본문은 복원되지만 현재 작성 중이던 태그·위치가 그대로 남아 섞이는 문제 발생.  
 
 <img src="./README_images/debug/Post-4-2.PNG">
 
@@ -110,52 +110,52 @@ GlobalGates는 무역 기반 비즈니스 소셜 마켓 플랫폼으로, 국내 
  
 <img src="./README_images/debug/Post-4-2_code.PNG">
 
-  임시저장 시 본문만 다루던 로직이 원인.
-  tbl_post_temp 테이블에 location, tag 컬럼을 추가하고 VO, DTO 에도 필드를 추가.
-  태그와 위치를 같이 저장하고, 불러올때 기존 태그, 위치를 초기화한 뒤에 복원하도록 수정.
-  - 임시저장한 글을 불러와도 태그, 위치가정확히 복원됨.
-  - 다른 글 작성 중 불러와도 이전 내용이 섞이지 않음.
+  임시저장 시 본문만 다루던 로직이 원인.  
+  tbl_post_temp 테이블에 location, tag 컬럼을 추가하고 VO, DTO 에도 필드를 추가.  
+  태그와 위치를 같이 저장하고, 불러올때 기존 태그, 위치를 초기화한 뒤에 복원하도록 수정.  
+  - 임시저장한 글을 불러와도 태그, 위치가정확히 복원됨.  
+  - 다른 글 작성 중 불러와도 이전 내용이 섞이지 않음.  
 
   ---
 2. 멘션시 대상 회원을 찾지 못함
 
 - 문제 상황
 
-  게시물 작성 과정에 @로 멘션해 게시글을 작성하면 멘션이 저장되지 않음. 
-  오류 없이 "handle 못찾음" 로그 출력.
+  게시물 작성 과정에 @로 멘션해 게시글을 작성하면 멘션이 저장되지 않음.  
+  오류 없이 "handle 못찾음" 로그 출력.  
 
 - 해결
 
 <img src="./README_images/debug/Post-mention-1_code.PNG">
 
-  DB의 member_handle 은 @amugae 처럼 @를 포함한 형태로 저장되어 있는데,
-  멘션 저장 로직에서 @를 제거한 amugae 로 조회해 일치하는 회원이 없었음.
-  @를 제거하지 않고, 없으면 오히려 @를 붙여 DB 형식에 맞춰 조회하도록 수정.
-  - @amugae  멘션이 정상적으로 회원과 매칭되어 저장됨.
+  DB의 member_handle 은 @amugae 처럼 @를 포함한 형태로 저장되어 있는데,  
+  멘션 저장 로직에서 @를 제거한 amugae 로 조회해 일치하는 회원이 없었음.  
+  @를 제거하지 않고, 없으면 오히려 @를 붙여 DB 형식에 맞춰 조회하도록 수정.  
+  - @amugae  멘션이 정상적으로 회원과 매칭되어 저장됨.  
 
   ---
 3. 구독 결제 정보가 저장되지 않음
 
-- 문제 상황
-  구독 시 tbl_subscription 에는 정상 저장되지만 tbl_payment_subscribe 에는 저장되지 않음.
-  서버 콘솔창 확인 결과 결제 금액 amount 가 null 로 들어옴.
+- 문제 상황  
+  구독 시 tbl_subscription 에는 정상 저장되지만 tbl_payment_subscribe 에는 저장되지 않음.  
+  서버 콘솔창 확인 결과 결제 금액 amount 가 null 로 들어옴.  
 
 <img src="./README_images/debug/Subscribe-2.png">
 
 - 해결
 
-body: JSON.stringify({
-    subscriptionId: subscriptionId,
+`body: JSON.stringify({  
+    subscriptionId: subscriptionId,  
     amount: bootpayResponse.price,  
-    paymentMethod: bootpayData.method_origin || bootpayData.method || "",
-    receiptId: bootpayData.receipt_id || "",
-    paidAt: bootpayData.purchased_at || null,
-}),
-에서 amount: bootpayResponse.price || plan.amountValue, 로 수정하였다.
+    paymentMethod: bootpayData.method_origin || bootpayData.method || "",  
+    receiptId: bootpayData.receipt_id || "",  
+    paidAt: bootpayData.purchased_at || null,  
+}),`  
+에서 amount: bootpayResponse.price || plan.amountValue, 로 수정하였다.  
 
-  결제 저장시 amount 에 bootpayResponse.price 를 넣었으나 null 전달.
-  plan.amountValue 로 항상 금액이 들어가도록 수정.
-  - 구독 시 tbl_payment_subscribe 에 결제 금액이 잘 저장됨.
+  결제 저장시 amount 에 bootpayResponse.price 를 넣었으나 null 전달.  
+  plan.amountValue 로 항상 금액이 들어가도록 수정.  
+  - 구독 시 tbl_payment_subscribe 에 결제 금액이 잘 저장됨.  
 
 ## 총평
 
