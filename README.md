@@ -95,7 +95,7 @@ GlobalGates는 무역 기반 비즈니스 소셜 마켓 플랫폼으로, 국내 
 
 ## 백엔드 담당업무
 
-<img src="./README_images/글로벌게이츠엑셀(김민중).png">
+<img src="./README_images/글로벌게이츠엑셀(김민중).PNG">
 
 ---
 
@@ -145,7 +145,7 @@ GlobalGates는 무역 기반 비즈니스 소셜 마켓 플랫폼으로, 국내 
   구독 시 tbl_subscription 에는 정상 저장되지만 tbl_payment_subscribe 에는 저장되지 않음.  
   서버 콘솔창 확인 결과 결제 금액 amount 가 null 로 들어옴.  
 
-<img src="./README_images/debug/Subscribe-2.png">
+<img src="./README_images/debug/Subscribe-2.PNG">
 
 - 해결
 ```js
