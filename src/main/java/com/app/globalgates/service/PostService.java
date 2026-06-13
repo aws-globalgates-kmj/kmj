@@ -474,7 +474,7 @@ public class PostService {
         log.info("멘션저장 들어옴1 postId: {}, taggerId: {}, handles: {}", postId, taggerId, mentionedHandles);
 
         for (String handle : mentionedHandles) {
-            log.info("멘션저장 들어옴2 handle: {}", handle);
+//            log.info("멘션저장 들어옴2 handle: {}", handle);
             // DB에 @포함 형태로 저장되어 있으므로 @가 없으면 붙여서 검색
             String searchHandle = handle.startsWith("@") ? handle : "@" + handle;
             Optional<MemberDTO> taggedMember = memberMapper.selectMemberByMemberHandle(searchHandle);

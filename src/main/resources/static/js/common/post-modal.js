@@ -435,7 +435,9 @@ const postModalApi = (() => {
 
             // 기존 태그 초기화 후 복원
             const oldTags = getTagDivs();
-            for (let i = 0; i < oldTags.length; i++) { oldTags[i].remove(); }
+            for (let i = 0; i < oldTags.length; i++) {
+                oldTags[i].remove();
+            }
             if (loaded.postTempTags) {
                 JSON.parse(loaded.postTempTags).forEach(tag => addTag(tag));
             }
